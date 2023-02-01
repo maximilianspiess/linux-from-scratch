@@ -6,11 +6,11 @@
 
 ## Summaries
 
-### Summary Title
+### Tarred software packages
 
-TLDR:
+Linux source software packages most often come in an **archived** (*tarred*) and **compressed** (*gzipped*) format, the file extension being .tar.gz or .tgz, which in the jargon is known as a "tarball". Depending on the compression algorithm used, the final section of the file extension may differ. Most any of these packages can be unpacked using
 
-Actual summary text
+> `tar tzvf <filename>`
 
 -----
 
