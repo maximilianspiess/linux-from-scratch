@@ -6,6 +6,8 @@
 
 ## Summaries
 
+---
+
 ### Tarred software packages
 
 Linux source software packages most often come in an **archived** (*tarred*) and **compressed** (*gzipped*) format, the file extension being .tar.gz or .tgz, which in the jargon is known as a "tarball". Depending on the compression algorithm used, the final section of the file extension may differ. Most any of these packages can be unpacked using:
@@ -28,6 +30,7 @@ On occasion, `shar` files, or **shell archives** may also be encountered. These 
 
 `unshar <filename>`
 
+---
 
 ### Make
 
@@ -52,10 +55,23 @@ Instead, an **INSTALL** or a **configure** script may be present. The exact proc
 
 >***NOTE:*** Root permissions should not be necessary for compiling the binaries, only for moving them to their respective directories. For tools and scripts which do all in one command, the question on whether to execute as super user should answer itself.
 
+---
 
-### RPM != "revs per minute"
+### rpm > tarball?
 
-Package managers such as *rpm*, *deb* or *slp* provide a similarly simple installation procedure as the Install Wizard used by Windows. While in theory, they can contain any type of file, they binari wallah
+#### Package managers
+
+Package managers such as *rpm*, *deb* or *slp* (such files are henceforth referred to as **rpm**s) provide a similarly simple installation procedure as the Install Wizard used by Windows. While an rpm can contain any type of file, they are more often than not filled with **prepackaged and precompiled binary files**, which are simply put into their directories.
+
+The big selling point of this mode of software distribution is the entirely **automated installation** procedure, followed directly by **dependency resolution** and mandatory **malware scans** provided by package managers, which all hugely simplify the process for end-users.
+
+#### Tarball releases
+
+The other main source of software are tarballs. Usually, they are the only reasonable way to acquire **sourcecode** for a given application. Everything about a tarball is more **flexible** than their prepackaged counterpart, as every step from decompression to compilation and over to installation can be manually adjusted.
+
+This of course comes with more effort for the user, but should you find yourself having to debug, say, a deprecated library, there is no other plausible way.
+
+That being said, rpm distributables are not made as easily as just bundling up some binaries. The process can be so laborious that, for smaller software especially, there may not even be a managed instance in a package manager, leaving tarballs as the only option. This also applies to other software, so always expect **rpms** to **lag behind tarball** releases.
 
 -----
 
