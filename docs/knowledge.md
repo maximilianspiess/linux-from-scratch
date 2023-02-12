@@ -73,6 +73,65 @@ This of course comes with more effort for the user, but should you find yourself
 
 That being said, rpm distributables are not made as easily as just bundling up some binaries. The process can be so laborious that, for smaller software especially, there may not even be a managed instance in a package manager, leaving tarballs as the only option. This also applies to other software, so always expect **rpms** to **lag behind tarball** releases.
 
+---
+
+### UNIX Links
+
+Predominantly present on UNIX-Systems, links generally represent references to directories, files, or a file's contents, similar to a shortcut in Windows systems. 
+
+There is one important concept to be understood here: a file path in UNIX is not a unique identifier to a given file, but instead, a file is ultimately labeled by a number called the **inode**, or the **index node**. The inode number of a file can be displayed with
+
+`ls -i`
+
+and the total number of references to an inode is the column between access rights and file owners using
+
+`ls -l`
+
+This means that files are entities separate from file paths, so in theory, multiple file paths can point to the same file. There are two primary types of links; hard links and soft links.
+
+#### Hard links
+
+Hard links connect a filename or filepath to an actual file in memory, which are inodes. They are created either when a new file is created, using `touch` for example, or manually using
+
+`ln <src_path> <new_path>`
+
+Hard links pointing to the same files will share the same inode identifier, and therefore both the file's content as well as it's attributes, such as access rights, owners, date of creation etc. They are not copies however, but links, and changing one will affect the inode, and thus all other hard links. A file is only truly deleted once all hard links and processes using them have been erased. Attempting to manually delete files via inodes will usually result in the host filesystem breaking.
+
+That being said, inode numbers are system-specific, and so hard links cannot be used to access files on other systems. Also, hard links can only be associated to regular files, so directories or special files cannot be linked this way.
+
+#### Soft links
+
+Soft links, also known as **symbolic links**, or abbreviated **symlink**, are a special file type, which point to another existing file. They contain a file path, either relative or absolute. This means that they can both be used to point to files on another system, assuming the established file structure is identical. In addition, they can also point to any type of file, including special files, such as directories, devices, and other symlinks.
+
+Soft links can be created using
+
+`ln -s <src_path> <new_path>`
+
+In stark contrast to hard links, the objects pointed to by soft links can easily be deleted, breaking the soft link. Such a link is called a *dangling soft link*. If a new file is created in the old one's stead, the symlink will once again have a valid target, whether intentional or not.
+
+#### tl;dr
+
+inodes:
+- are file system specific
+- identify a file in memory uniquely
+- are only removed once all references are erased
+
+Hard links:
+- point to files via inodes
+- several can point to one inode
+
+Soft links:
+- point to files via filepaths
+- can be used cross-system
+
+#### Sources
+
+- [Hard links and soft links in Linux](https://www.redhat.com/sysadmin/linking-linux-explained)
+
+---
+
+### Special files
+
 -----
 
 ## Links to guides and other useful stuff
